@@ -1,3 +1,134 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+app_home:
+    path: /home
+    controller: App\Controller\HomeController::index
+
+app_cars:
+    path: /cars
+    controller: App\Controller\VehiculeController::index
+
+app_contact:
+    path: /contact
+    controller: App\Controller\ContactController::index
+
+
+app_service:
+    path: /service
+    controller: App\Controller\ServiceController::index
+
+app_add_notice:
+    path: /add/notice
+    controller: App\Controller\AvisController::create
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+
+app_vehicules_filtre:
+    path: '/vehicules/filtre'
+    controller: 'App\Controller\VehiculeController::filtrerVehicules'
+   
+
+app_add_c_contact:
+    path: '/add/c/contact/'
+    controller: 'App\Controller\ContactController::addContact'
+    
+
+
+# Partie Url de l'admin #
+
+app_admin_user:
+    path: /admin/liste/emp
+    controller: App\Controller\UserController::index
+
+
+app_add_compte:
+    path: /user/compte
+    controller: App\Controller\RegistrationController::register
+
+
+app_admin_horaire:
+    path: /admin/horaire
+    controller: App\Controller\HoraireController::index
+
+
+app_admin_add_horaire:
+    path: /admin/add/horaire
+    controller: App\Controller\HoraireController::addHoraire
+
+
+app_admin_service:
+    path: /adùin/service
+    controller: App\Controller\ServiceController::service
+
+
+app_add_service:
+    path: /admin/add/service
+    controller: App\Controller\ServiceController::addService
+
+
+app_edit_service:
+    path: '/admin/edit/service/{idService}'
+    controller: 'App\Controller\ServiceController::update'
+    methods: ['GET']
+
+app_destroy_service:
+    path: '/admin/service/destroy/{idService}'
+    controller: 'App\Controller\ServiceController::destroy'
+    methods: ['GET']
+
+
+# partie Url employé #
+
+app_emp_vehicule:
+    path: /emp/vehicule
+    controller: App\Controller\VehiculeController::show
+
+
+app_emp_add_vehicule:
+    path: /emp/add/vehicule
+    controller: App\Controller\VehiculeController::addVehicule
+
+
+app_emp_edit_vehicule:
+    path: '/emp/edit/vehicule/{idVehicule}'
+    controller: 'App\Controller\VehiculeController::update'
+    methods: ['GET']
+
+app_emp_avis:
+    path: /emp/avis
+    controller: App\Controller\AvisController::avis
+
+app_add_avis:
+    path: /emp/add/avis
+    controller: App\Controller\AvisController::addAvis
+
+app_emp_contact_clients:
+    path: /emp/contact/clients
+    controller: App\Controller\ContactController:showContactClients
+
+
+app_destroy_demande:
+    path: '/emp/demande/destroy/{idDemande}'
+    controller: 'App\Controller\ContactController::destroy'
+    methods: ['GET']
+
+
+app_destroy_avis:
+    path: '/emp/avis/destroy/{idAvis}'
+    controller: 'App\Controller\AvisController::destroy'
+    methods: ['GET']
+
+
+app_update_avis:
+    path: '/emp/avis/upate/{idAvis}'
+    controller: 'App\Controller\AvisController::update'
+    methods: ['GET']

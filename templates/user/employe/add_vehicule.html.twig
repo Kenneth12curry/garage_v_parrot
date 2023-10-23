@@ -1,0 +1,64 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %} <title> Espace utilisateur </title>{% endblock %}
+
+
+{% block container %}
+
+<form  action="{{path('app_emp_add_vehicule')}}" class="d-flex flex-column align-items-center" method="POST">
+
+    <!--Création d'un champ input caché pour récupérer l'id du véhicule-->
+    <input type="hidden"  
+    name="id" value="{% if vehicule is defined  %} {{vehicule.id}} {% else %} 0 {% endif %}" >
+     
+    <div class="card shadow m-5 w-50 fw-bold p-5 ml-5">
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label ms-5">Nom du véhicule</label>
+            <input type="text"  name="nomVehicule" 
+            value="{% if vehicule is defined  %}{{vehicule.nom}}{% endif %}" 
+            class="form-control w-75 ms-5" id="exampleInputEmail">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInput" class="form-label ms-5">Prix</label>
+            <input type="number" name="prixVehicule" 
+            value="{{ vehicule is defined ? vehicule.prix : '' }}" 
+            step="0.01" class="form-control w-75 ms-5" id="exampleInput">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInput" class="form-label ms-5">Image du véhicule</label>
+            <input type="file" name="imageVehicule" 
+            value="{% if vehicule is defined  %}{{vehicule.image}}{% endif %}" 
+            class="form-control w-75 ms-5" id="exampleInput">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInput" class="form-label ms-5">Année de mise en circulation</label>
+            <input type="number" name="anneeVehicule" 
+            value="{% if vehicule is defined  %}{{vehicule.annee}}{% endif %}" 
+            step="1" class="form-control w-75 ms-5" id="exampleInput">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInput" class="form-label ms-5">Kilométrage</label>
+            <input type="number" name="kilometrageVehicule" 
+            value="{% if vehicule is defined  %}{{vehicule.kilometrage}}{% endif %}" 
+            step="0.01" class="form-control w-75 ms-5" id="exampleInput">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInput" class="form-label ms-5">Marque</label>
+            <input type="text" name="marqueVehicule" 
+            value="{% if vehicule is defined  %}{{vehicule.marque}}{% endif %}" 
+            class="form-control w-75 ms-5" id="exampleInput">
+        </div>
+
+        <button type="submit" name="btnSave" class="btn bg-gradient-dark mt-2 w-75 ms-5" 
+        value="{% if vehicule is defined  %}update{% else %}create{% endif %}"><i class="fas fa-save me-1"></i>Enregistrer</button>
+    </div>
+    
+</form>
+
+{% endblock container %}

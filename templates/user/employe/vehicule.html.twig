@@ -1,0 +1,57 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %} <title> Espace utilisateur </title>{% endblock %}
+
+
+{% block container %}
+
+<div class="container"> 
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+
+        {% for data in vehicules %}
+    
+            <div class="card ms-5" style="width: 18rem;">
+                <img src="{{asset('images/')}}{{data.image}}" class="card-img-top w-100" alt="...">
+                <div class="card-body">
+                    <div class="d-flex flex-column">
+                        <h5 class="card-title">{{data.nom}}</h5>
+                        <span class="card-text">Année : {{data.annee}}</span>
+                        <span class="card-text">Marque : {{data.marque}}</span>
+                        <span class="card-text">Kilométrage : {{data.kilometrage}} km</span>
+                        <span class="card-text">Prix : {{data.prix}} €</span>
+                    </div>
+                    <div class="d-flex mt-3">
+                        <a href="{{path('app_emp_edit_vehicule',{'idVehicule': data.id})}}"  class="btn bg-gradient-dark me-2">Modifier</a>
+                        <a href="#" class="btn bg-gradient-danger">Supprimer</a>
+                    </div>
+                </div>
+            </div> 
+    
+        {% endfor %}
+    
+    </div>
+    
+</div>
+
+
+<!-- Partie Pagination -->
+ <div class="row mt-5">
+    <div class="col text-center">
+        <div class="pagination justify-content-center">
+            {% if page > 1 %}
+                <a class="page-link" href="{{ path('app_emp_vehicule', {'page': page - 1}) }}">Précédent</a>
+            {% endif %}
+            
+            {% for p in 1..maxPages %}
+                <a class="page-link{% if p == page %} active{% endif %}" href="{{ path('app_emp_vehicule', {'page': p}) }}">{{ p }}</a>
+            {% endfor %}
+        
+            {% if page < maxPages %}
+                <a class="page-link" href="{{ path('app_emp_vehicule', {'page': page + 1}) }}">Suivant</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock container %}

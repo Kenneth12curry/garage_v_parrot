@@ -1,0 +1,76 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %} <title> Espace utilisateur </title>{% endblock %}
+
+
+{% block container %}
+
+<div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6>Liste des comptes employés</h6>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                      <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Photo</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nom</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prenom</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Téléphone</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Adresse</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
+                      <th class="text-secondary text-center opacity-7">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                  {% for data in datas %}
+
+                    <tr>
+                          <td>
+                              <div class="d-flex justify-content-center">
+                                <img src="{{asset('assets/img/')}}{{data.photo}}" class="avatar avatar-sm" alt="user1">
+                              </div>
+                          </td>
+                          <td class="text-center">
+                            <h6 class="mb-0 text-sm">{{data.nom}}</h6>
+                          </td>
+                          <td  class="text-center">
+                            <h6 class="mb-0 text-sm">{{data.prenom}}</h6>
+                          </td>
+                          <td  class="text-center">
+                              <p class="text-xs text-secondary mb-0">{{data.login}}</p>
+                          </td>
+                          <td  class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">{{data.tel}}</p>
+                          </td>
+                          <td  class="text-center">
+                            <p class="text-xs text-secondary mb-0">{{data.adresse}}</p>
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success">{{data.roles | join(', ') }}</span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                              Edit
+                            </a>
+                          </td>
+                    </tr>
+
+                 {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock container %}

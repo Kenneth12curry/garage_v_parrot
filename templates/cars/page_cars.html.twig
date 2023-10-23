@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} <title> Cars </title> {% endblock %}
+
+
+{% block container %}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_8.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+        <div class="col-md-9 ftco-animate pb-5">
+            <p class="breadcrumbs"><span class="mr-2"><a href="{{path('app_home')}}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
+          <h1 class="mb-3 bread">Choisissez votre voiture</h1>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<section class="ftco-section bg-light">
+      <div class="container"> 
+        
+          <form action="{{path('app_vehicules_filtre')}}" method="POST">
+              <div class="row mb-5">
+                  <div class="col-md-8 d-flex justify-content-center mb-3">
+                    <input type="text" name="filtre" class="form-control border-light" placeholder="Champ de recherche">
+                  </div>
+                  <div class="col-md-2 d-flex justify-content-center mb-3">
+                    <button type="submit" class="btn btn-danger font-weight-bold py-1 px-4"><i class="fa fa-search"></i>Rechercher</button>
+                  </div>
+              </div>
+          </form>
+
+          <div class="row">
+
+                  {% for data in vehicules %}
+
+                      <div class="col-md-4">
+                          <div class="car-wrap rounded ftco-animate card shadow">
+                              <div class="img rounded d-flex align-items-end">
+                                <img src="{{asset('images/')}}{{data.image}}" width="10:rem" height= "240" class="card-img-top" alt="..." >
+                              </div>
+                              <div class="text">
+                                  <h2 class="mb-0"><a href="car-single.html">{{data.nom}}</a></h2>
+                                  <div class="mb-3">
+                                      <span class="cat text-dark mt-2">Année : {{data.annee}}</span>
+                                      <span class="cat text-dark">{{data.marque}}</span>
+                                      <span class="cat text-dark">{{data.kilometrage}} km</span>
+                                      <hr class="bg-dark" />
+                                      <span class="price ml-auto text-dark font-weight-bold">{{data.prix}} €</span>
+
+                                  </div>
+                                  <div class="d-flex">
+                                    <p class="mb-0 d-block"><a href="car-single.html" class="btn btn-dark py-2 ml-1">Details</a></p>
+                                    <a type="button" class="btn btn-black" data-toggle="modal" data-target="#exampleModal"
+                                      data-vehicule-nom="{{data.nom}}">
+                                        Contact
+                                    </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  {% endfor %}
+           
+          </div>
+
+          <div class="row mt-5">
+              <div class="col text-center">
+                    <div class="pagination justify-content-center">
+                        {% if page is defined and page > 1 %}
+                            <a class="page-link" href="{{ path('app_cars', {'page': page - 1}) }}">Précédent</a>
+                        {% endif %}
+                        
+                        {% if maxPages is defined %}
+
+                        {% for p in 1..maxPages %}
+                            <a class="page-link{% if p == page %} active{% endif %}" href="{{ path('app_cars', {'page': p}) }}">{{ p }}</a>
+                        {% endfor %}
+
+                        {% endif %}
+                    
+                        {% if page is defined and page < maxPages %}
+                            <a class="page-link" href="{{ path('app_cars', {'page': page + 1}) }}">Suivant</a>
+                        {% endif %}
+                    </div>
+              </div>
+          </div>
+      </div>
+</section>
+  
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulaire de contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <form action="{{path('app_add_c_contact')}}" class="bg-light p-5" method="POST">
+              <div class="form-group">
+                <input type="text" name="sujet" id="sujet" class="form-control" placeholder="Sujet" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="nom" class="form-control" placeholder="Votre Nom" required>
+              </div>
+              <div class="form-group">
+                  <input type="text" name="prenom" class="form-control" placeholder="Votre Prenom"  required>
+              </div>
+              <div class="form-group">
+                <input type="email"  name="email" class="form-control" placeholder="Votre Email"  required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="tel" class="form-control" placeholder="Votre Téléphone"  required>
+              </div>
+              <div class="form-group">
+                <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"  required></textarea>
+              </div>
+              <div class="form-group mt-2">
+                <button type="submit" name="btnSave" value="create" class="btn btn-danger py-2 px-5">Envoyer</button>
+              </div>
+          </form>
+
+      </div>
+      <div class="modal-footer">
+        <!--button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Js-->
+<script>
+  $(document).ready(function() {
+    $('#exampleModal').on('show.bs.modal', function(event) {
+        console.log("Modal ouvert !");
+        var button = $(event.relatedTarget);
+        var vehiculeNom = button.data('vehicule-nom');
+        $('#sujet').val(vehiculeNom);
+    });
+});
+</script>
+<!---->
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %} <title> Espace utilisateur </title>{% endblock %}
+
+
+{% block container %}
+
+
+<div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6>Liste des demandes</h6>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Prenom</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sujet</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Téléphone</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Message</th>
+                    <th class="text-secondary text-center  opacity-7">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                    {% for data in datas %}
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">{{data.nom}}</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">{{data.prenom}}</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">{{data.sujet}}</p>
+                        </td>
+                        <td>
+                            <p class="text-xs text-secondary mb-0">{{data.email}}</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-secondary">{{data.tel}}</span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{data.message}}</span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <a href="{{ path('app_destroy_demande', {'idDemande': data.id}) }}" class="delete-link btn bg-gradient-danger text-white font-weight-bold text-xs ms-2" data-toggle="tooltip" data-original-title="Edit user">
+                                <i class="fas fa-trash me-1"></i>
+                                Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="{{ asset('js/delete_confirmation.js') }}"></script>
+
+{% endblock container %}
+
+

@@ -1,0 +1,56 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %} <title> Espace utilisateur </title>{% endblock %}
+
+
+{% block container %}
+
+{% if errors is not empty %}
+
+<div class="">
+
+    <div class="alert alert-danger text-white font-weight-bold">
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+    
+{% endif %}
+
+<form action="{{path('app_add_service')}}" class="d-flex flex-column align-items-center" method="POST">
+
+    <!--Création d'un champ input caché pour récupérer l'id du service-->
+    <input type="hidden"  
+    name="id" value="{% if service is defined  %} {{service.id}} {% else %} 0 {% endif %}" >
+
+    <div class="card shadow m-5 w-50 fw-bold p-5 ml-5">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label ms-5">Nom du Service</label>
+            <input type="text" name="nomService"
+            value="{% if service is defined  %}{{service.nomService}}{% endif %}" 
+            class="form-control w-75 ms-5" id="exampleInputEmail">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label ms-5">Description</label>
+            <textarea name="descriptionService" class="form-control w-75 ms-5" id="exampleInputPassword1">{% if service is defined  %}{{service.description}}{% endif %}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInput" class="form-label ms-5">Catégorie</label>
+            <input type="text" name="categorieService" 
+            value="{% if service is defined  %}{{service.categorie}}{% endif %}" 
+            class="form-control w-75 ms-5" id="exampleInput">
+        </div>
+        
+        <button type="submit" name="btnSave"
+        value="{% if service is defined  %}update{% else %}create{% endif %}"
+        class="btn bg-gradient-dark mt-2 w-75 ms-5"><i class="fas fa-save me-1"></i>Enregistrer</button>
+    </div>
+</form>
+
+{% endblock container %}
