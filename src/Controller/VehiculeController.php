@@ -128,7 +128,7 @@ class VehiculeController extends AbstractController
 
 
     
-        
+    # méthode pour modifer un véhicule 
     #[Route('/emp/edit/vehicule/{idVehicule}', name: 'app_emp_edit_vehicule', methods: ["GET"])]
     public function update(Request $request, $idVehicule, VehiculeRepository $vehiculeRepository): Response
     {
@@ -161,17 +161,17 @@ class VehiculeController extends AbstractController
     public function filtrerVehicules(Request $request, VehiculeRepository $vehiculeRepository): Response
     {
         //$filtre = $request->query->get('filtre'); 
-        $nomV=$request->request->get("filtre");// Récupère le paramètre 'filtre' depuis l'URL
+        $nomV=$request->request->get("filtre");// Récupère le paramètre 'filtre' d
 
         if($nomV==null){
             return $this->redirectToRoute('app_cars');
         }
            
         
-        // Utilisez $filtre pour filtrer la liste des véhicules
+        // Utilisez $nomV pour filtrer la liste des véhicules
         $vehicules = $vehiculeRepository->findByFirstVehicule($nomV);
 
-        return $this->render('cars/index.html.twig', [
+        return $this->render('cars/page_cars.html.twig', [
                 'vehicules' => $vehicules
         ]);
        
