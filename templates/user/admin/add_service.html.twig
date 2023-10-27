@@ -5,18 +5,14 @@
 
 {% block container %}
 
-{% if errors is not empty %}
+{% if errors is defined and errors is not empty %}
 
-<div class="">
-
-    <div class="alert alert-danger text-white font-weight-bold">
-        <ul>
-            {% for error in errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-
+<div class="alert alert-danger text-white font-weight-bold">
+    <ul>
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
 </div>
     
 {% endif %}

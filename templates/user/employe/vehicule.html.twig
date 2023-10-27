@@ -40,18 +40,19 @@
     <div class="col text-center">
         <div class="pagination justify-content-center">
             {% if page > 1 %}
-                <a class="page-link" href="{{ path('app_emp_vehicule', {'page': page - 1}) }}">Précédent</a>
+                <a class="page-link text-dark" href="{{ path('app_emp_vehicule', {'page': page - 1}) }}">Précédent</a>
             {% endif %}
             
             {% for p in 1..maxPages %}
-                <a class="page-link{% if p == page %} active{% endif %}" href="{{ path('app_emp_vehicule', {'page': p}) }}">{{ p }}</a>
+                <a class="page-link{% if p == page %} active{% endif %} text-dark" href="{{ path('app_emp_vehicule', {'page': p}) }}">{{ p }}</a>
             {% endfor %}
         
             {% if page < maxPages %}
-                <a class="page-link" href="{{ path('app_emp_vehicule', {'page': page + 1}) }}">Suivant</a>
+                <a class="page-link text-dark" href="{{ path('app_emp_vehicule', {'page': page + 1}) }}">Suivant</a>
             {% endif %}
         </div>
     </div>
 </div>
+<!--end pagination-->
 
 {% endblock container %}

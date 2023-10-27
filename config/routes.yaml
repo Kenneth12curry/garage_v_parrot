@@ -40,6 +40,12 @@ app_vehicules_filtre:
 app_add_c_contact:
     path: '/add/c/contact/'
     controller: 'App\Controller\ContactController::addContact'
+
+
+
+app_details:
+    path: '/details/{idVehicule}'
+    controller: 'App\Controller\DetailsController::index'
     
 
 
@@ -63,6 +69,10 @@ app_admin_horaire:
 app_admin_add_horaire:
     path: /admin/add/horaire
     controller: App\Controller\HoraireController::addHoraire
+
+app_edit_horaire:
+    path: /admin/edit/horaire/{idHoraire}
+    controller: App\Controller\HoraireController::updateHoraire
 
 
 app_admin_service:
@@ -131,4 +141,17 @@ app_destroy_avis:
 app_update_avis:
     path: '/emp/avis/upate/{idAvis}'
     controller: 'App\Controller\AvisController::update'
+    methods: ['GET']
+
+
+app_destroy_emp:
+    path: '/emp/destroy/{idEmp}'
+    controller: 'App\Controller\UserController::destroy'
+    methods: ['GET']
+
+
+
+app_footer:
+    path: '/footer'
+    controller: 'App\Controller\FooterController::index'
     methods: ['GET']

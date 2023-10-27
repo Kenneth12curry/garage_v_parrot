@@ -83,7 +83,7 @@ class ServiceController extends AbstractController
             $service->setNomService($nom);
             $service->setDescription($description);
             $service->setCategorie($categorie);
-            //Appel de la méthode save qui se trouve dans VehiculeRepository
+            //Appel de la méthode save qui se trouve dans ServiceRepository
             $serviceRepository->save($service,true);
             //redirection vers la liste des services (admin)
             return $this->redirectToRoute('app_admin_service');
@@ -96,33 +96,32 @@ class ServiceController extends AbstractController
 
     }
 
+    // méthode pour modifer un service
     #[Route('/admin/edit/service/{idService}', name: 'app_edit_service', methods:["GET"])]
     public function update($idService,ServiceRepository $serviceRepository):Response{
 
-        # variable qui contient la liste des erreurs
-        $errors=[];
+        
         $service = $serviceRepository->findOneBy(['id' => $idService]);
         return $this->render('user/admin/add_service.html.twig', [
             "service" => $service,
-            'errors' => $errors,
             'controller_name' => 'ServiceController',
         ]);
 
     }
 
-      //méthode pour supprimer un service
-      #[Route('/admin/service/destroy/{idService}', name: 'app_destroy_service',methods:["GET"])]
-      public function destroy($idService,ServiceRepository $serviceRepository): Response
-      {
-  
-          //récupération de la l'id du service
-          $service=$serviceRepository->find($idService);
-          //Appel de la méthode remove qui se trouve dans ServiceRepository
-          $serviceRepository->remove($service,true);
-          //redirection vers la liste des services (admin)
-          return $this->redirectToRoute('app_admin_service');
+    //méthode pour supprimer un service
+    #[Route('/admin/service/destroy/{idService}', name: 'app_destroy_service',methods:["GET"])]
+    public function destroy($idService,ServiceRepository $serviceRepository): Response
+    {
 
-      }
+        //récupération de la l'id du service
+        $service=$serviceRepository->find($idService);
+        //Appel de la méthode remove qui se trouve dans ServiceRepository
+        $serviceRepository->remove($service,true);
+        //redirection vers la liste des services (admin)
+        return $this->redirectToRoute('app_admin_service');
+
+    }
   
   
 

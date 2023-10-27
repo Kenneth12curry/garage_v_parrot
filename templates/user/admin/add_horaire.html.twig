@@ -5,32 +5,64 @@
 
 {% block container %}
 
-<form class="d-flex flex-column align-items-center">
+{% if errors is defined and errors is not empty %}
+
+<div class="alert alert-danger text-white font-weight-bold">
+    <ul>
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+    
+{% endif %}
+
+
+{% if message is defined %}
+<div id="dialog" title="Message">
+    <p class="font-weight-bold">{{ message }}</p>
+</div>
+{% endif %}
+
+<form action="{{path('app_admin_add_horaire')}}" class="d-flex flex-column align-items-center" method="POST">
+
+    <!--Création d'un champ input caché pour récupérer l'id du service-->
+    <input type="hidden"  
+    name="id" value="{% if horaire is defined  %} {{horaire.id}} {% else %} 0 {% endif %}" >
+
     <div class="card shadow m-5 w-50 fw-bold p-5 ml-5">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label ms-5">Jour</label>
-            <select class="form-control w-75 ms-5" id="exampleInputEmail1" >
-                <option>Lundi</option>
-                <option>Mardi</option>
-                <option>Mercredi</option>
-                <option>Jeudi</option>
-                <option>Vendredi</option>
-                <option>Samedi</option>
+            <select name="jour" class="form-control w-75 ms-5" id="exampleInputEmail1" >
+                <option value="Lundi">Lundi</option>
+                <option value="Mardi">Mardi</option>
+                <option value="Mercredi">Mercredi</option>
+                <option value="Jeudi">Jeudi</option>
+                <option value="Vendredi">Vendredi</option>
+                <option value="Samedi">Samedi</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label ms-5">Heure Ouverture</label>
-            <input type="time" class="form-control w-75 ms-5" id="exampleInputPassword1">
+            <input type="time" name="HeureOuverture" 
+            value="{% if horaire is defined  %}{{ horaire.heureOuverture|date('H:i') }}{% endif %}" 
+            class="form-control w-75 ms-5" id="exampleInputPassword1">
         </div>
 
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label ms-5">Heure Fermeture</label>
-            <input type="time" class="form-control w-75 ms-5" id="exampleInputPassword1">
+            <input type="time" name="HeureFermeture" 
+            value="{% if horaire is defined  %}{{ horaire.heureFermeture|date('H:i') }}{% endif %}" 
+            class="form-control w-75 ms-5" id="exampleInputPassword1">
         </div>
 
-        <button type="submit" class="btn btn-primary mt-2 w-75 ms-5"><i class="fas fa-save me-1"></i>Enregistrer</button>
+        <button type="submit" name="btnSave" 
+        value="{% if horaire is defined  %}update{% else %}create{% endif %}"
+        class="btn bg-gradient-dark mt-2 w-75 ms-5"><i class="fas fa-save me-1"></i>Enregistrer</button>
     </div>
 </form>
+
+
 
 {% endblock container %}

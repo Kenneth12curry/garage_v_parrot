@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Employe;
 use App\Form\CompteUserFormType;
+use App\Repository\EmployeRepository;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class RegistrationController extends AbstractController
             $emp->setPassword(
                 $userPasswordHasher->hashPassword(
                     $emp,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
 
@@ -36,15 +37,18 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
+            /* return $userAuthenticator->authenticateUser(
                 $emp,
                 $authenticator,
                 $request
-            );
+            );*/
+            return $this->redirectToRoute("app_admin_user");
         }
 
         return $this->render('user/admin/add_compte.html.twig', [
             'CompteUserForm' => $form->createView(),
         ]);
     }
+
+
 }

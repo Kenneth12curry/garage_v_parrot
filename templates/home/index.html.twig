@@ -11,17 +11,9 @@
       <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
         <div class="col-lg-8 ftco-animate">
             <div class="text w-100 text-center mb-md-5 pb-md-5">
-              <h1 class="mb-4">Un moyen rapide et facile de louer une voiture</h1>
-              <p style="font-size: 18px;">les meilleurs voitures et services de réparation offerts par le Garage V.Parrot</p>
-              <a href="https://vimeo.com/45830194" class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
-                  <div class="icon d-flex align-items-center justify-content-center">
-                      <span class="ion-ios-play"></span>
-                  </div>
-                  <div class="heading-title ml-5">
-                      <span>Easy steps for renting a car</span>
-                  </div>
-              </a>
-          </div>
+                <h1 class="mb-4">Un moyen rapide et facile de louer une voiture</h1>
+                <p class="text-white" style="font-size: 18px;">les meilleurs voitures et services de réparation offerts par le Garage V.Parrot</p>
+            </div>
         </div>
       </div>
     </div>
@@ -64,9 +56,6 @@
                               </div>      
                             </div>
                           </div>
-                          <p class="text-center"><a href="#" class="btn btn-black py-3 px-4 font-weight-bold">Réservez votre voiture idéale</a></p>
-                            </div>
-                        </div>
                     </div>
               </div>
         </div>
@@ -100,7 +89,7 @@
                                     <span class="price ml-auto text-dark font-weight-bold">{{data.prix}} €</span>
       
                                 </div>
-                                <p class="mb-0 d-block text-center"><a href="car-single.html" class="btn btn-dark py-2 ml-1">Details</a></p>
+                                <p class="mb-0 d-block text-center"><a  href="{{path('app_details',{'idVehicule': data.id})}}" class="btn btn-dark py-2 ml-1">Details</a></p>
                             </div>
                         </div>
                         
@@ -142,48 +131,27 @@
             <div class="row justify-content-center mb-5">
         <div class="col-md-7 text-center heading-section ftco-animate">
         <span class="subheading">Services</span>
-        <h2 class="mb-3">Our Latest Services</h2>
+        <h2 class="mb-3">Nos derniers Services</h2>
         </div>
     </div>
             <div class="row">
-                <div class="col-md-3">
-                    <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-wedding-car"></span></div>
-            <div class="text w-100">
-            <h3 class="heading mb-2">Wedding Ceremony</h3>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+               
+                    {% for data in services %}
+                        <div class="col-md-3">
+                            <div class="services services-2 w-100 text-center mb-2">
+                                <div class="bg-dark icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
+                                <div class="text w-100">
+                                <h3 class="heading mb-2">{{data.nomService}}</h3>
+                                <p class="text-dark">{{data.description}}</p>
+                                <span class="badge bg-danger text-white">{{data.categorie}}</span>
+                            </div>
+                        </div>
+                        </div>
+                    {% endfor %}
+
             </div>
-        </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
-            <div class="text w-100">
-            <h3 class="heading mb-2">City Transfer</h3>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
-        </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
-            <div class="text w-100">
-            <h3 class="heading mb-2">Airport Transfer</h3>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
-        </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="services services-2 w-100 text-center">
-            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
-            <div class="text w-100">
-            <h3 class="heading mb-2">Whole City Tour</h3>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
-        </div>
-                </div>
-            </div>
-        </div>
+                
+         </div>
     </section>
 
     <section class="ftco-section ftco-intro" style="background-image: url(images/bg_3.jpg);">
@@ -214,8 +182,8 @@
                 <div class="testimony-wrap rounded text-center py-4 pb-5">
                     <div class="user-img mb-2">Témoignages</div>
                     <div class="text pt-4">
-                    <p class="mb-4">{{a.commentaire}}</p>
-                    <p class="name">{{a.note}}</p>
+                    <p class="mb-4 text-dark">{{a.commentaire}}</p>
+                    <p class="name text-dark">{{a.note}}</p>
                     <span class="position">{{a.nom}}</span>
                     </div>
                 </div>

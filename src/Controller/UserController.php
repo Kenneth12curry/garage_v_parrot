@@ -20,5 +20,19 @@ class UserController extends AbstractController
         ]);
     }
 
+
+    #méthode pour supprimer un compte employé
+    #[Route('/emp/destroy/{idEmp}', name: 'app_destroy_emp',methods:["GET"])]
+    public function destroy($idEmp,EmployeRepository $employeRepository): Response
+    {
+        //récupération de l'employé à pértir de l'id
+        $emp=$employeRepository->find($idEmp);
+        //Appel de la méthode remove qui se trouve dans AvisRepository
+        $employeRepository->remove($emp,true);
+        //redirection vers la liste des demandes (employés)
+        return $this->redirectToRoute('app_admin_user');
+
+    }
+
    
 }

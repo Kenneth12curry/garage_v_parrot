@@ -111,19 +111,7 @@ class AvisController extends AbstractController
         return $this->handleAddAvis($request,$avisRepository,$tokenStorage,'avis/page_avis.html.twig');
     }
 
-    #méthode de suppresion d'un avis
-    #[Route('/emp/avis/destroy/{idAvis}', name: 'app_destroy_avis',methods:["GET"])]
-    public function destroy($idAvis,AvisRepository $avisRepository): Response
-    {
-
-        //récupération de l'avis à prtir de l'id
-        $avis=$avisRepository->find($idAvis);
-        //Appel de la méthode remove qui se trouve dans AvisRepository
-        $avisRepository->remove($avis,true);
-        //redirection vers la liste des demandes (employés)
-        return $this->redirectToRoute('app_emp_avis');
-
-    }
+   
 
      #méthode qui permet la modification d'un avis
     #[Route('/emp/avis/update/{idAvis}', name: 'app_update_avis',methods:["GET"])]
@@ -154,6 +142,19 @@ class AvisController extends AbstractController
 
     }
 
+    #méthode de suppresion d'un avis
+    #[Route('/emp/avis/destroy/{idAvis}', name: 'app_destroy_avis',methods:["GET"])]
+    public function destroy($idAvis,AvisRepository $avisRepository): Response
+    {
+
+        //récupération de l'avis à prtir de l'id
+        $avis=$avisRepository->find($idAvis);
+        //Appel de la méthode remove qui se trouve dans AvisRepository
+        $avisRepository->remove($avis,true);
+        //redirection vers la liste des demandes (employés)
+        return $this->redirectToRoute('app_emp_avis');
+
+    }
    
 
 }

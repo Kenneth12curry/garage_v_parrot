@@ -5,8 +5,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;1,100&family=Oswald:wght@300&display=swap');
-
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -207,7 +205,7 @@ select,
 optgroup,
 textarea {
   margin: 0;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: inherit;
   line-height: inherit; }
 
@@ -9955,5 +9953,3 @@ textarea.form-control {
     stroke-dashoffset: -136px; } }
 
 
-
-  

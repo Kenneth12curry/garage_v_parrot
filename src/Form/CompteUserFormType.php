@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Employe;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,7 @@ class CompteUserFormType extends AbstractType
             ->add('nom',TextType::class,['attr'=>['class'=>'form-control']])
             ->add('prenom',TextType::class,['attr'=>['class'=>'form-control']])
             ->add('tel',TextType::class,['attr'=>['class'=>'form-control']])
+            ->add('photo',FileType::class,['attr'=>['class'=>'form-control']])
             ->add('adresse',TextType::class,['attr'=>['class'=>'form-control']])
             ->add('password',PasswordType::class, [
                 // instead of being set onto the object directly,

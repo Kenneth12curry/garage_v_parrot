@@ -58,6 +58,7 @@ class VehiculeController extends AbstractController
     #[Route('/emp/add/vehicule', name: 'app_emp_add_vehicule')]
     public function addVehicule(Request $request, VehiculeRepository $vehiculeRepository): Response
     {
+        
         $errors=[];
         // Si l'utilisateur clique sur le bouton enrgistrer du formulaire
         if($request->request->has("btnSave")){
@@ -69,7 +70,7 @@ class VehiculeController extends AbstractController
             $kilometrage=$request->request->get("anneeVehicule");
             $marque=$request->request->get("marqueVehicule");
 
-            //Validation => vérification
+           //Validation => vérification
             if(empty($nom)){
                 $errors['nom']="Le nom du véhicule est obligatoire";
             }
@@ -88,11 +89,14 @@ class VehiculeController extends AbstractController
             if(empty($marque)){
                 $errors['marque']="La marque du véhicule est obligatoire";
             }
+            
+            // Si des erreurs sont présentes, on les affiche
             if(count($errors)!=0){
-                return $this->redirectToRoute('app_emp_add_vehicule',[
-                    "errors"=>$errors
+                return $this->render('user/employe/add_vehicule.html.twig', [
+                    'errors' => $errors,
                 ]);
             }
+            
 
             if(trim($request->request->get("btnSave"))=='create'){
                 //Création de l'objet de type Véhicule
@@ -120,7 +124,8 @@ class VehiculeController extends AbstractController
         } 
        
         return $this->render('user/employe/add_vehicule.html.twig', [
-            'controller_name' => 'VehiculeController',
+            'errors' => $errors,
+            'controller_name' => 'ServiceController',
         ]);
     
 
@@ -175,7 +180,6 @@ class VehiculeController extends AbstractController
                 'vehicules' => $vehicules
         ]);
        
-
     }
 
 
