@@ -48,6 +48,11 @@ app_details:
     controller: 'App\Controller\DetailsController::index'
     
 
+app_footer:
+    path: '/footer'
+    controller: 'App\Controller\FooterController::index'
+    methods: ['GET']
+    
 
 # Partie Url de l'admin #
 
@@ -151,7 +156,7 @@ app_destroy_emp:
 
 
 
-app_footer:
-    path: '/footer'
-    controller: 'App\Controller\FooterController::index'
+app_destroy_vehicule:
+    path: '/emp/vehicule/destroy/{idVehicule}'
+    controller: 'App\Controller\VehiculeController::destroy'
     methods: ['GET']

@@ -183,4 +183,20 @@ class VehiculeController extends AbstractController
     }
 
 
+    //méthode pour supprimer un service
+    #[Route('/emp/vehicule/destroy/{idVehicule}', name: 'app_destroy_vehicule',methods:["GET"])]
+    public function destroy($idVehicule,VehiculeRepository $vehiculeRepository): Response
+    {
+
+        //récupération de véhicule à partir de l'id
+        $vehicule=$vehiculeRepository->find($idVehicule);
+        //Appel de la méthode remove qui se trouve dans VehiculeRepository
+        $vehiculeRepository->remove($vehicule,true);
+        //redirection vers la liste des vehciules (employés)
+        return $this->redirectToRoute('app_emp_vehicule');
+
+    }
+    
+
+
 }
