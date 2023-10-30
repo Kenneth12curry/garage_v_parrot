@@ -14,7 +14,7 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
+              <table class="table align-items-center mb-0" id="maTable">
                 <thead>
                     <tr>
                       <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Photo</th>
@@ -44,19 +44,19 @@
                             <h6 class="mb-0 text-sm">{{data.prenom}}</h6>
                           </td>
                           <td  class="text-center">
-                              <p class="text-xs text-secondary mb-0">{{data.login}}</p>
+                              <p class="text-xs text-dark mb-0">{{data.login}}</p>
                           </td>
                           <td  class="text-center">
                             <p class="text-xs font-weight-bold mb-0">{{data.tel}}</p>
                           </td>
                           <td  class="text-center">
-                            <p class="text-xs text-secondary mb-0">{{data.adresse}}</p>
+                            <p class="text-xs text-dark mb-0">{{data.adresse}}</p>
                           </td>
                           <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-success">{{data.roles | join(', ') }}</span>
                           </td>
                           <td class="align-middle text-center">
-                            <a href="{{path('app_destroy_emp',{'idEmp': data.id})}}" class="delete-link btn bg-gradient-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="{{path('app_destroy_emp',{'idEmp': data.id})}}" class="delete-link btn bg-gradient-danger text-xs" data-toggle="tooltip" data-original-title="Edit user">
                               <i class="fas fa-trash me-1"></i>
                               suprrimer
                             </a>
@@ -92,5 +92,24 @@
   });
 
 </script>
+
+<script>
+  function toggleSelection(row) {
+      row.classList.toggle('selected');
+  }
+
+  const rows = document.querySelectorAll('#maTable tbody tr');
+  rows.forEach(row => {
+      row.addEventListener('click', () => {
+          toggleSelection(row);
+      });
+  });
+</script>
+
+<style>
+  .selected {
+      background-color: lightblue;
+  }
+</style>
 
 {% endblock container %}

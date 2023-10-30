@@ -20,8 +20,12 @@ security:
             custom_authenticator: App\Security\UserAuthenticator
             logout:
                 path: app_logout
+                # Votre configuration de déconnexion ici
+                # Si vous utilisez CSRF
+                delete_cookies: ~ # Si vous devez supprimer des cookies spécifiques
+                invalidate_session: true
                 # where to redirect after logout
-                # target: app_any_route
+                # target: app_home
 
             remember_me:
                 secret: '%kernel.secret%'

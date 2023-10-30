@@ -19,7 +19,7 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2 mt-3">
             <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
+              <table class="table align-items-center mb-0" id="maTable">
                 <thead>
                   <tr>
                     <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Nom du service</th>
@@ -38,20 +38,20 @@
                             <p class="text-xs font-weight-bold mb-0">{{data.nomService}}</p>
                         </td>
                         <td>
-                            <p class="text-xs font-weight-bold mb-0" style="white-space: pre-line;">{{data.description}}</p>
+                            <p class="text-xs font-weight-bold text-dark mb-0" style="white-space: pre-line;">{{data.description}}</p>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{data.categorie}}</span>
+                          <span class="text-dark text-xs font-weight-bold">{{data.categorie}}</span>
                         </td>
                         <td class="align-middle text-center text-sm">
                           <span class="badge badge-sm bg-gradient-success">{{data.disponible}}</span>
                         </td>
                         <td class="align-middle me-5">
-                          <a  href="{{path('app_edit_service',{'idService': data.id})}}" class="btn bg-gradient-dark text-white font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          <a  href="{{path('app_edit_service',{'idService': data.id})}}" class="btn bg-gradient-dark text-white text-xs" data-toggle="tooltip" data-original-title="Edit user">
                             <i class="fas fa-sync-alt me-1"></i>
                             Modifier
                           </a>
-                          <a  href="{{path('app_destroy_service',{'idService': data.id})}}" class="btn bg-gradient-danger text-white font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          <a  href="{{path('app_destroy_service',{'idService': data.id})}}" class="delete-link btn bg-gradient-danger text-white text-xs" data-toggle="tooltip" data-original-title="Edit user">
                             <i class="fas fa-trash me-1"></i>
                               Supprimer
                           </a>
@@ -68,5 +68,43 @@
       </div>
     </div>
 </div>
+
+<script>
+  // Dans votre fichier JavaScript (par exemple assets/js/delete_confirmation.js)
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var deleteLinks = document.querySelectorAll('.delete-link');
+
+    deleteLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            var confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer ce service ?");
+            if (confirmation) {
+                window.location.href = link.href;
+            }
+        });
+    });
+  });
+
+</script>
+
+<script>
+  function toggleSelection(row) {
+      row.classList.toggle('selected');
+  }
+
+  const rows = document.querySelectorAll('#maTable tbody tr');
+  rows.forEach(row => {
+      row.addEventListener('click', () => {
+          toggleSelection(row);
+      });
+  });
+</script>
+
+<style>
+  .selected {
+      background-color: lightblue;
+  }
+</style>
 
 {% endblock container %}

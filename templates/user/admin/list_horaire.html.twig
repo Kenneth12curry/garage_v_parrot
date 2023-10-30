@@ -19,7 +19,7 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
+              <table class="table align-items-center mb-0" id="maTable">
                 <thead>
                   <tr>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jour</th>
@@ -43,7 +43,7 @@
                           <span class="badge badge-sm bg-gradient-danger">{{data.heureFermeture|date('H:i')}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <a href="{{path('app_edit_horaire',{'idHoraire': data.id})}}"  class="btn bg-gradient-dark font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="{{path('app_edit_horaire',{'idHoraire': data.id})}}"  class="btn bg-gradient-dark text-xs" data-toggle="tooltip" data-original-title="Edit user">
                               <i class="fas fa-sync-alt me-1"></i>
                               Modifier
                             </a>
@@ -60,5 +60,24 @@
       </div>
     </div>
 </div>
+
+<script>
+  function toggleSelection(row) {
+      row.classList.toggle('selected');
+  }
+
+  const rows = document.querySelectorAll('#maTable tbody tr');
+  rows.forEach(row => {
+      row.addEventListener('click', () => {
+          toggleSelection(row);
+      });
+  });
+</script>
+
+<style>
+  .selected {
+      background-color: lightblue;
+  }
+</style>
 
 {% endblock container %}

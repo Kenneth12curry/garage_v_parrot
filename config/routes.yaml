@@ -28,7 +28,7 @@ app_login:
     controller: App\Controller\SecurityController::login
 
 app_logout:
-    path: /logout
+    path: /logout/decon
     controller: App\Controller\SecurityController::logout
 
 

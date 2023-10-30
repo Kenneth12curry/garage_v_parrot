@@ -126,16 +126,6 @@ class AvisController extends AbstractController
             $avis->setEtat("Accepté");
             //push dans la bd
             $avisRepository->save($avis,true);
-        }else{
-                // Affichage de la boîte de dialogue
-                echo '<script>
-                    var confirmation = window.confirm("Impossible car l&apos;avis est déja accepté");
-                    if (confirmation) {
-                        window.location.href = "'. $this->generateUrl('app_update_avis', ['idAvis' => $idAvis]) .'";
-                    } else {
-                        // Annuler
-                    }
-                </script>';
         }
         //redirection vers la liste des avis
         return $this->redirectToRoute('app_emp_avis');

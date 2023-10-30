@@ -15,7 +15,7 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
+              <table class="table align-items-center mb-0" id="maTable">
                 <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom</th>
@@ -49,16 +49,16 @@
                             <p class="text-xs font-weight-bold mb-0">{{data.sujet}}</p>
                         </td>
                         <td>
-                            <p class="text-xs text-secondary mb-0">{{data.email}}</p>
+                            <p class="text-xs text-dark mb-0">{{data.email}}</p>
                         </td>
                         <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-secondary">{{data.tel}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{data.message}}</span>
+                            <span class="text-dark text-xs font-weight-bold">{{data.message}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <a href="{{ path('app_destroy_demande', {'idDemande': data.id}) }}" class="delete-link btn bg-gradient-danger text-white font-weight-bold text-xs ms-2" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="{{ path('app_destroy_demande', {'idDemande': data.id}) }}" class="delete-link btn bg-gradient-danger text-white text-xs ms-2" data-toggle="tooltip" data-original-title="Edit user">
                                 <i class="fas fa-trash me-1"></i>
                                 Supprimer
                             </a>
@@ -76,6 +76,26 @@
 </div>
 
 <script src="{{ asset('js/delete_confirmation.js') }}"></script>
+
+
+<script>
+  function toggleSelection(row) {
+      row.classList.toggle('selected');
+  }
+
+  const rows = document.querySelectorAll('#maTable tbody tr');
+  rows.forEach(row => {
+      row.addEventListener('click', () => {
+          toggleSelection(row);
+      });
+  });
+</script>
+
+<style>
+  .selected {
+      background-color: lightblue;
+  }
+</style>
 
 {% endblock container %}
 
