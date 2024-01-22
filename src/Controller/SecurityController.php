@@ -6,12 +6,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Environment;
 
 class SecurityController extends AbstractController 
 {
+    private $twig;
+
+    public function __construct(Environment $twig)
+    {
+        $this->twig = $twig;
+    }
+
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -38,31 +45,21 @@ class SecurityController extends AbstractController
        
     }*/
 
-    #[Route(path: '/logout/decon', name: 'app_logout')]
-    public function logout(Security $security, TokenStorageInterface $tokenStorage)
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(Request $request): Response
     {
-        // Récupérer l'utilisateur actuellement authentifié
-        $user = $security->getUser();
+        // Supprimez les données de l'utilisateur de la session
+        $request->getSession()->remove('user');
 
-        // Si un utilisateur est authentifié, le déconnecter
-        if ($user) {
-            $token = $tokenStorage->getToken();
-            $token->setAuthenticated(false);
-            $tokenStorage->setToken(null);
+        // Récupérez la variable globale 'user' de l'environnement Twig
+        $userGlobal = $this->twig->getGlobals()['user'];
 
-            $this->get('session')->invalidate(); // Détruire la session
-        }
-
-        // Rediriger ou effectuer toute autre action après la déconnexion
-        $response = new Response();
-        $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
-        $response->headers->set('Pragma', 'no-cache');
-        $response->headers->set('Expires', '0');
-
-        return $this->redirectToRoute('app_home');
+        $userGlobal=null;
+    
+        /** Redirigez l'utilisateur après la déconnexion */
+        return $this->redirectToRoute('home'); // Remplacez 'home' par le nom de la route vers laquelle vous souhaitez rediriger après la déconnexion
 
     }
-
    
 
 
